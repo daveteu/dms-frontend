@@ -28,7 +28,8 @@ const fetcher = (url: string) =>
 const ProfilePage = () => {
   const { data, error, mutate } = useSWR('/api/account', fetcher);
 
-  const onCreateMailAccount = async (e: React.SyntheticEvent) => {
+  const onCreateMailAccount = async (e: React.FormEvent<HTMLFormElement>) => {
+    e = e || window.event;
     e.preventDefault();
     const target = e.target as typeof e.target & {
       email: { value: string };
@@ -47,6 +48,8 @@ const ProfilePage = () => {
       },
     });
     if (results !== null) {
+      const resetForm = e.target as HTMLFormElement;
+      resetForm.reset();
       mutate();
     }
   };

@@ -47,6 +47,8 @@ const MailAlias = () => {
       },
     });
     if (results !== null) {
+      const resetForm = e.target as HTMLFormElement;
+      resetForm.reset();
       mutate();
     }
   };
